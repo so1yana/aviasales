@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+@import './variables.scss';
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: $text-color-gray;
+    min-width: 525px;
+}
+
+body {
+    background-color: $bgc-app;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+main {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+main section {
+    display: flex;
+    margin-left: 20px;
+    flex-direction: column;
+}
+
+@media (max-width: 810px) {
+    main {
+        width: 504px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    main section {
+        margin-left: 0;
+        width: 504px;
+    }
+}

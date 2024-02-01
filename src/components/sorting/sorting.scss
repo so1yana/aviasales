@@ -1,0 +1,45 @@
+@import '../../variables.scss';
+
+.sorting {
+    display: flex;
+    flex-direction: row;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 8px 0 $box-shadow-color;
+    min-width: 320px;
+}
+
+.sorting__item:first-child .sorting__item-button {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    border-right: none;
+}
+
+.sorting__item:last-child .sorting__item-button {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border-left: none;
+}
+
+.sorting__item-button {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: white;
+    width: 168px;
+    height: 50px;
+    border: 1px solid $border-btn-color;
+    transition: $def-transition-time background-color;
+}
+
+.sorting__item-button:hover {
+    background-color: $hover-sort-btn-color;
+}
+
+.sorting__item.active .sorting__item-button {
+    color: white;
+    background-color: $active-btn-color;
+    border: none;
+}
