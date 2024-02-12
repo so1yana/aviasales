@@ -106,7 +106,8 @@ export default function TicketList() {
         },
     ];
     const elements = tickets.map((item) => {
-        return <TicketItem key={item.carrier} ticket={item} />;
+        const randNum = Math.floor(Math.random() * 12345);
+        return <TicketItem key={randNum} ticket={item} />;
     });
 
     return (
