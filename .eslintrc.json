@@ -55,6 +55,8 @@
             {
                 "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
             }
-        ]
+        ],
+        "default-param-last": ["off"],
+        "no-case-declarations": "off"
     }
 }
