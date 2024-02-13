@@ -11,6 +11,7 @@ const initialState = {
         isFast: false,
         isOptimal: false,
     },
+    cards: [],
 };
 
 const allActiveFilters = {
@@ -100,6 +101,16 @@ const reducer = (state = initialState, action) => {
                     return { ...state, sorting: { ...allInactiveSorting, isFast: true } };
                 case 'OPTIMAL':
                     return { ...state, sorting: { ...allInactiveSorting, isOptimal: true } };
+                default:
+                    return state;
+            }
+        case 'CARD':
+            switch (action.card) {
+                case 'ADD':
+                    const cards = [...state.cards];
+                    if (!Array.isArray(action.body)) cards.push(action.body);
+                    else cards.push(...action.body);
+                    return { ...state, cards };
                 default:
                     return state;
             }
