@@ -1,5 +1,12 @@
 @import '../../variables.scss';
 
+.temp-button {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid $active-btn-color;
+    border-radius: $border-radius;
+}
+
 .filters {
     background-color: #fff;
     min-width: 232px;
