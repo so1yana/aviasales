@@ -9,7 +9,8 @@ const calculateTime = (minutes) => {
 
 export default function TicketItem(props) {
     const { ticket } = props;
-    const { price, carrier, segments } = ticket;
+    const { price, carrier, segments, display } = ticket;
+    if (!display) return null;
     const [firstSeg, secSeg] = segments;
     const firstCities = `${firstSeg.origin}-${firstSeg.destination}`;
     const secondCities = `${secSeg.origin}-${secSeg.destination}`;
