@@ -1,123 +1,22 @@
+import { connect } from 'react-redux';
 import TicketItem from '../ticket-item';
 import './ticket-list.scss';
 
-export default function TicketList() {
-    // const { tickets } = props;
-    const tickets = [
-        {
-            price: 13400,
-            carrier: 'aeroflot',
-            segments: [
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '10:45 - 08:00',
-                    stops: ['HKG', 'JNB'],
-                    duration: 1275,
-                },
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '11:20 - 00:50',
-                    stops: ['HKG'],
-                    duration: 810,
-                },
-            ],
-        },
-        {
-            price: 13400,
-            carrier: 'aeroflot',
-            segments: [
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '10:45 - 08:00',
-                    stops: ['HKG', 'JNB'],
-                    duration: 1275,
-                },
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '11:20 - 00:50',
-                    stops: ['HKG'],
-                    duration: 810,
-                },
-            ],
-        },
-        {
-            price: 13400,
-            carrier: 'aeroflot',
-            segments: [
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '10:45 - 08:00',
-                    stops: ['HKG', 'JNB'],
-                    duration: 1275,
-                },
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '11:20 - 00:50',
-                    stops: ['HKG'],
-                    duration: 810,
-                },
-            ],
-        },
-        {
-            price: 13400,
-            carrier: 'aeroflot',
-            segments: [
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '10:45 - 08:00',
-                    stops: ['HKG', 'JNB'],
-                    duration: 1275,
-                },
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '11:20 - 00:50',
-                    stops: ['HKG'],
-                    duration: 810,
-                },
-            ],
-        },
-        {
-            price: 13400,
-            carrier: 'aeroflot',
-            segments: [
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '10:45 - 08:00',
-                    stops: ['HKG', 'JNB'],
-                    duration: 1275,
-                },
-                {
-                    origin: 'MOW',
-                    destination: 'HKT',
-                    date: '11:20 - 00:50',
-                    stops: ['HKG'],
-                    duration: 810,
-                },
-            ],
-        },
-    ];
-    const elements = tickets.map((item) => {
-        const randNum = Math.floor(Math.random() * 12345);
-        return <TicketItem key={randNum} ticket={item} />;
-    });
+function TicketList({ state }) {
+    const tickets = state.cards;
+    let elements = [];
+    if (Array.isArray(tickets)) {
+        elements = tickets.map((item) => {
+            const randNum = Math.floor(Math.random() * 12345);
+            return <TicketItem key={randNum} ticket={item} />;
+        });
+    } else elements = null;
 
-    return (
-        <>
-            <ul className="ticket-list">{elements}</ul>
-            {tickets.length > 4 && (
-                <button className="show-more-items-button" type="button">
-                    показать еще
-                </button>
-            )}
-        </>
-    );
+    return <ul className="ticket-list">{elements}</ul>;
 }
+
+const mapStateToProps = (state) => {
+    return { state };
+};
+
+export default connect(mapStateToProps)(TicketList);
