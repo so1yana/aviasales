@@ -3,22 +3,3 @@
 .ticket-list {
     margin-top: 20px;
 }
-
-.show-more-items-button {
-    height: 50px;
-    margin-bottom: 50px;
-    background-color: $active-btn-color;
-    border-radius: 5px;
-    color: white;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    transition: 0.2s;
-}
-
-.show-more-items-button:hover {
-    background-color: #2183f3;
-}
