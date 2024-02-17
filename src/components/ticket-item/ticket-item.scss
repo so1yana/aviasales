@@ -14,6 +14,10 @@
     background-color: $super-light-gray-color;
 }
 
+.ticket__company {
+    height: 36px;
+}
+
 .ticket__body {
     display: flex;
     flex-direction: column;
@@ -23,7 +27,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
 .ticket__price {
