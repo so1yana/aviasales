@@ -1,17 +1,21 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { loadCards } from '../../actions/cards';
 import TicketItem from '../ticket-item';
 import './ticket-list.scss';
 
-function TicketList({ state }) {
-    const tickets = state.cards;
+function TicketList({ state, lc }) {
+    useEffect(() => {
+        lc(state.searchId);
+    }, []);
+    const tickets = state.cardsOnShow;
     let elements = [];
     if (Array.isArray(tickets)) {
         elements = tickets.map((item) => {
-            const randNum = Math.floor(Math.random() * 12345);
+            const randNum = Math.floor(Math.random() * 123456789);
             return <TicketItem key={randNum} ticket={item} />;
         });
     } else elements = null;
-
     return <ul className="ticket-list">{elements}</ul>;
 }
 
@@ -19,4 +23,4 @@ const mapStateToProps = (state) => {
     return { state };
 };
 
-export default connect(mapStateToProps)(TicketList);
+export default connect(mapStateToProps, { lc: loadCards })(TicketList);
