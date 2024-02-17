@@ -127,3 +127,8 @@ button {
     background-color: transparent;
     cursor: pointer;
 }
+
+html {
+    margin-right: calc(-1 * (100vw - 100%));
+    overflow-x: hidden;
+}
