@@ -1,10 +1,17 @@
 @import '../../variables.scss';
 
-.temp-button {
-    margin-top: 20px;
-    padding: 16px;
-    border: 1px solid $active-btn-color;
-    border-radius: $border-radius;
+.loader__text {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $text-color-gray;
+    font-size: 14px;
+}
+
+.loader__text-count {
+    text-transform: lowercase;
+    font-weight: 500;
 }
 
 .filters {
@@ -14,6 +21,7 @@
     height: 252px;
     border-radius: $border-radius;
     box-shadow: 0 0 6px 0 $box-shadow-color;
+    margin-bottom: 20px;
 }
 
 .filters__title {
@@ -101,6 +109,5 @@
     .filters {
         width: 100%;
         min-width: 320px;
-        margin-bottom: 20px;
     }
 }

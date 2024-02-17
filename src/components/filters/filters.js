@@ -1,54 +1,9 @@
 import './filters.scss';
 import { connect } from 'react-redux';
+import Loader from '../loader';
 import * as actions from '../../actions/filters';
 
-function Filters({ state, all, without, one, two, three, add }) {
-    const testTicket1 = {
-        display: true,
-        price: 13400,
-        carrier: 'aeroflot',
-        segments: [
-            {
-                origin: 'MOW',
-                destination: 'HKT',
-                date: '10:45 - 08:00',
-                stops: ['HKG', 'JNB'],
-                duration: 1275,
-            },
-            {
-                origin: 'MOW',
-                destination: 'HKT',
-                date: '11:20 - 00:50',
-                stops: ['HKG'],
-                duration: 810,
-            },
-        ],
-    };
-
-    const testTicket2 = {
-        display: false,
-        price: 13400,
-        carrier: 'aeroflot',
-        segments: [
-            {
-                origin: 'MOW',
-                destination: 'HKT',
-                date: '10:45 - 08:00',
-                stops: ['HKG', 'JNB'],
-                duration: 1275,
-            },
-            {
-                origin: 'MOW',
-                destination: 'HKT',
-                date: '11:20 - 00:50',
-                stops: ['HKG'],
-                duration: 810,
-            },
-        ],
-    };
-
-    const tickets = [testTicket1, testTicket2];
-
+function Filters({ state, all, without, one, two, three }) {
     const {
         isAllActive,
         isOneTransferActive,
@@ -121,17 +76,18 @@ function Filters({ state, all, without, one, two, three, add }) {
                     </label>
                 </li>
             </ul>
-            <button
-                className="temp-button"
-                type="button"
-                onClick={() => {
-                    const index = Math.floor(Math.random() + 0.5);
-                    console.log(index);
-                    add(tickets[index]);
-                }}
-            >
-                ADD CARD
-            </button>
+            <p className="loader__text">
+                Получено:<span className="loader__text-count"> {state.cards.length}</span>
+            </p>
+            <p className="loader__text">
+                Отфильтровано :
+                <span className="loader__text-count"> {state.filteredCards.length}</span>
+            </p>
+            <p className="loader__text">
+                На показ:
+                <span className="loader__text-count"> {state.cardsOnShow.length}</span>
+            </p>
+            {state.status === 'LOADING' && <Loader />}
         </div>
     );
 }
