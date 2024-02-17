@@ -1,3 +1,26 @@
-export const cheap = () => ({ type: 'SORTING', sorting: 'CHEAP' });
-export const fast = () => ({ type: 'SORTING', sorting: 'FAST' });
-export const optimal = () => ({ type: 'SORTING', sorting: 'OPTIMAL' });
+import { sort, addOnShow, cleanOnShow } from './cards';
+
+export const cheap = () => {
+    return (dispatch) => {
+        dispatch({ type: 'SORTING', sorting: 'CHEAP' });
+        dispatch(sort());
+        dispatch(cleanOnShow());
+        dispatch(addOnShow());
+    };
+};
+export const fast = () => {
+    return (dispatch) => {
+        dispatch({ type: 'SORTING', sorting: 'FAST' });
+        dispatch(sort());
+        dispatch(cleanOnShow());
+        dispatch(addOnShow());
+    };
+};
+export const optimal = () => {
+    return (dispatch) => {
+        dispatch({ type: 'SORTING', sorting: 'OPTIMAL' });
+        dispatch(sort());
+        dispatch(cleanOnShow());
+        dispatch(addOnShow());
+    };
+};
