@@ -7,14 +7,10 @@ import App from './components/app';
 import './index.scss';
 import './reset.css';
 
-const logger = (store) => (next) => (action) => {
-    const result = next(action);
-    console.log('Middle', ...store.getState().cards);
-    return result;
-};
-
-const store = configureStore({ reducer, middleware: () => new Tuple(logger, thunk) });
-
+const store = configureStore({
+    reducer,
+    middleware: () => new Tuple(thunk),
+});
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
