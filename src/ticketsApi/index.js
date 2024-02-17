@@ -14,7 +14,6 @@ async function getSearchId() {
 
 let responsesCount = 0;
 async function getPackTickets(searchId, dispatch) {
-    responsesCount += 1;
     const response = await fetch(
         `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,
     );
@@ -26,6 +25,7 @@ async function getPackTickets(searchId, dispatch) {
         });
         await getPackTickets(searchId, dispatch);
     } else {
+        responsesCount += 1;
         const json = await response.json();
         await dispatch(add(json.tickets));
         await dispatch(filter(json.tickets));
