@@ -1,5 +1,5 @@
-import './loader.scss';
+import classes from './loader.module.scss';
 
 export default function Loader() {
-    return <div className="loader__spinner" />;
+    return <div className={classes.loader__spinner} />;
 }

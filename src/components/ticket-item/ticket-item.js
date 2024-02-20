@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import './ticket-item.scss';
+import classes from './ticket-item.module.scss';
 
 const calculateTime = (minutes) => {
     const remainingMinutes = minutes % 60;
@@ -33,38 +32,42 @@ export default function TicketItem(props) {
     const firstSegTime = toNormalTime(new Date(firstSeg.date).getTime(), firstSeg.duration);
     const secSegTime = toNormalTime(new Date(secSeg.date).getTime(), secSeg.duration);
     return (
-        <li className="ticket">
-            <div className="ticket__body">
-                <div className="ticket__header">
-                    <p className="ticket__price">{price} ₽</p>
+        <li className={classes.ticket}>
+            <div className={classes.ticket__body}>
+                <div className={classes.ticket__header}>
+                    <p className={classes.ticket__price}>{price} ₽</p>
                     <img
-                        className="ticket__company"
+                        className={classes.ticket__company}
                         alt="logo"
                         src={`//pics.avs.io/99/36/${carrier}.png`}
                     />
                 </div>
-                <div className="ticket__info">
-                    <table className="ticket-table">
-                        <tbody className="ticket-table__tbody">
-                            <tr className="ticket-table__row">
-                                <th className="ticket-table__header">{firstCities}</th>
-                                <th className="ticket-table__header">В пути</th>
-                                <th className="ticket-table__header">Пересадки</th>
+                <div className={classes.ticket__info}>
+                    <table className={classes['ticket-table']}>
+                        <tbody className={classes['ticket-table__tbody']}>
+                            <tr className={classes['ticket-table__row']}>
+                                <th className={classes['ticket-table__header']}>{firstCities}</th>
+                                <th className={classes['ticket-table__header']}>В пути</th>
+                                <th className={classes['ticket-table__header']}>Пересадки</th>
                             </tr>
-                            <tr className="ticket-table__row">
-                                <td className="ticket-table__data">{firstSegTime}</td>
-                                <td className="ticket-table__data">{firstTime}</td>
-                                <td className="ticket-table__data">{firstSeg.stops.join(', ')}</td>
+                            <tr className={classes['ticket-table__row']}>
+                                <td className={classes['ticket-table__data']}>{firstSegTime}</td>
+                                <td className={classes['ticket-table__data']}>{firstTime}</td>
+                                <td className={classes['ticket-table__data']}>
+                                    {firstSeg.stops.join(', ')}
+                                </td>
                             </tr>
-                            <tr className="ticket-table__row">
-                                <th className="ticket-table__header">{secondCities}</th>
-                                <th className="ticket-table__header">В пути</th>
-                                <th className="ticket-table__header">Пересадки</th>
+                            <tr className={classes['ticket-table__row']}>
+                                <th className={classes['ticket-table__header']}>{secondCities}</th>
+                                <th className={classes['ticket-table__header']}>В пути</th>
+                                <th className={classes['ticket-table__header']}>Пересадки</th>
                             </tr>
-                            <tr className="ticket-table__row">
-                                <td className="ticket-table__data">{secSegTime}</td>
-                                <td className="ticket-table__data">{secondTime}</td>
-                                <td className="ticket-table__data">{secSeg.stops.join(', ')}</td>
+                            <tr className={classes['ticket-table__row']}>
+                                <td className={classes['ticket-table__data']}>{secSegTime}</td>
+                                <td className={classes['ticket-table__data']}>{secondTime}</td>
+                                <td className={classes['ticket-table__data']}>
+                                    {secSeg.stops.join(', ')}
+                                </td>
                             </tr>
                         </tbody>
                     </table>

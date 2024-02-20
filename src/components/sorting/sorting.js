@@ -1,14 +1,19 @@
 import { connect } from 'react-redux';
 import * as actions from '../../actions/sorting';
-import './sorting.scss';
+import classes from './sorting.module.scss';
 
 function Sorting({ state, cheap, fast, optimal }) {
-    const classes = 'sorting__item';
     return (
-        <ul className="sorting">
-            <li className={state.sorting === 'CHEAP' ? `${classes} active` : classes}>
+        <ul className={classes.sorting}>
+            <li
+                className={
+                    state.sorting === 'CHEAP'
+                        ? `${classes.sorting__item} ${classes.active}`
+                        : classes.sorting__item
+                }
+            >
                 <button
-                    className="sorting__item-button"
+                    className={classes['sorting__item-button']}
                     type="button"
                     onClick={(e) => {
                         if (e.target.parentElement.classList.contains('active')) return;
@@ -18,9 +23,15 @@ function Sorting({ state, cheap, fast, optimal }) {
                     самый дешевый
                 </button>
             </li>
-            <li className={state.sorting === 'FAST' ? `${classes} active` : classes}>
+            <li
+                className={
+                    state.sorting === 'FAST'
+                        ? `${classes.sorting__item} ${classes.active}`
+                        : classes.sorting__item
+                }
+            >
                 <button
-                    className="sorting__item-button"
+                    className={classes['sorting__item-button']}
                     type="button"
                     onClick={(e) => {
                         if (e.target.parentElement.classList.contains('active')) return;
@@ -30,9 +41,15 @@ function Sorting({ state, cheap, fast, optimal }) {
                     самый быстрый
                 </button>
             </li>
-            <li className={state.sorting === 'OPTIMAL' ? `${classes} active` : classes}>
+            <li
+                className={
+                    state.sorting === 'OPTIMAL'
+                        ? `${classes.sorting__item} ${classes.active}`
+                        : classes.sorting__item
+                }
+            >
                 <button
-                    className="sorting__item-button"
+                    className={classes['sorting__item-button']}
                     type="button"
                     onClick={(e) => {
                         if (e.target.parentElement.classList.contains('active')) return;

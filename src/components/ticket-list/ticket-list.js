@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loadCards } from '../../actions/cards';
 import TicketItem from '../ticket-item';
-import './ticket-list.scss';
+import classes from './ticket-list.module.scss';
 
 function TicketList({ state, lc }) {
     useEffect(() => {
@@ -16,7 +16,7 @@ function TicketList({ state, lc }) {
             return <TicketItem key={randNum} ticket={item} />;
         });
     } else elements = null;
-    return <ul className="ticket-list">{elements}</ul>;
+    return <ul className={classes['ticket-list']}>{elements}</ul>;
 }
 
 const mapStateToProps = (state) => {

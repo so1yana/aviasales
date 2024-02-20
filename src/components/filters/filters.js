@@ -1,7 +1,7 @@
-import './filters.scss';
 import { connect } from 'react-redux';
 import Loader from '../loader';
 import * as actions from '../../actions/filters';
+import classes from './filters.module.scss';
 
 function Filters({ state, all, without, one, two, three }) {
     const {
@@ -13,9 +13,9 @@ function Filters({ state, all, without, one, two, three }) {
     } = state.filters;
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <ul className="filters">
-                <li className="filters__title">количество пересадок</li>
-                <li className="filters__item">
+            <ul className={classes.filters}>
+                <li className={classes.filters__title}>количество пересадок</li>
+                <li className={classes.filters__item}>
                     <label htmlFor="all">
                         Все
                         <input
@@ -27,7 +27,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <span />
                     </label>
                 </li>
-                <li className="filters__item">
+                <li className={classes.filters__item}>
                     <label htmlFor="no_transfers">
                         Без пересадок
                         <input
@@ -39,7 +39,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <span />
                     </label>
                 </li>
-                <li className="filters__item">
+                <li className={classes.filters__item}>
                     <label htmlFor="one_transfer">
                         1 пересадка
                         <input
@@ -51,7 +51,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <span />
                     </label>
                 </li>
-                <li className="filters__item">
+                <li className={classes.filters__item}>
                     <label htmlFor="two_transfers">
                         2 пересадки
                         <input
@@ -63,7 +63,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <span />
                     </label>
                 </li>
-                <li className="filters__item">
+                <li className={classes.filters__item}>
                     <label htmlFor="three_transfers">
                         3 пересадки
                         <input
@@ -76,16 +76,17 @@ function Filters({ state, all, without, one, two, three }) {
                     </label>
                 </li>
             </ul>
-            <p className="loader__text">
-                Получено:<span className="loader__text-count"> {state.cards.length}</span>
+            <p className={classes.loader__text}>
+                Получено:
+                <span className={classes['loader__text-count']}> {state.cards.length}</span>
             </p>
-            <p className="loader__text">
+            <p className={classes.loader__text}>
                 Отфильтровано :
-                <span className="loader__text-count"> {state.filteredCards.length}</span>
+                <span className={classes['loader__text-count']}> {state.filteredCards.length}</span>
             </p>
-            <p className="loader__text">
+            <p className={classes.loader__text}>
                 На показ:
-                <span className="loader__text-count"> {state.cardsOnShow.length}</span>
+                <span className={classes['loader__text-count']}> {state.cardsOnShow.length}</span>
             </p>
             {state.status === 'LOADING' && <Loader />}
         </div>
