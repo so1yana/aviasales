@@ -1,16 +1,21 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../loader';
-import * as actions from '../../actions/filters';
+import Error from '../error';
+import { all, without, one, two, three } from '../../actions/filters';
 import classes from './filters.module.scss';
 
-function Filters({ state, all, without, one, two, three }) {
+function Filters() {
+    const dispatch = useDispatch();
     const {
         isAllActive,
         isOneTransferActive,
         isThreeTransfersActive,
         isTwoTransfersActive,
         isWithoutTransferActive,
-    } = state.filters;
+    } = useSelector((state) => state.filters);
+    const status = useSelector((state) => state.status);
+    const cardsLength = useSelector((state) => state.cards.length);
+    const cardsOnShow = useSelector((state) => state.cardsOnShow);
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <ul className={classes.filters}>
@@ -21,7 +26,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <input
                             type="checkbox"
                             id="all"
-                            onChange={(e) => all(e.target.checked)}
+                            onChange={(e) => dispatch(all(e.target.checked))}
                             checked={isAllActive}
                         />
                         <span />
@@ -33,7 +38,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <input
                             type="checkbox"
                             id="no_transfers"
-                            onChange={(e) => without(e.target.checked)}
+                            onChange={(e) => dispatch(without(e.target.checked))}
                             checked={isWithoutTransferActive}
                         />
                         <span />
@@ -45,7 +50,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <input
                             type="checkbox"
                             id="one_transfer"
-                            onChange={(e) => one(e.target.checked)}
+                            onChange={(e) => dispatch(one(e.target.checked))}
                             checked={isOneTransferActive}
                         />
                         <span />
@@ -57,7 +62,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <input
                             type="checkbox"
                             id="two_transfers"
-                            onChange={(e) => two(e.target.checked)}
+                            onChange={(e) => dispatch(two(e.target.checked))}
                             checked={isTwoTransfersActive}
                         />
                         <span />
@@ -69,7 +74,7 @@ function Filters({ state, all, without, one, two, three }) {
                         <input
                             type="checkbox"
                             id="three_transfers"
-                            onChange={(e) => three(e.target.checked)}
+                            onChange={(e) => dispatch(three(e.target.checked))}
                             checked={isThreeTransfersActive}
                         />
                         <span />
@@ -78,23 +83,20 @@ function Filters({ state, all, without, one, two, three }) {
             </ul>
             <p className={classes.loader__text}>
                 Получено:
-                <span className={classes['loader__text-count']}> {state.cards.length}</span>
+                <span className={classes['loader__text-count']}> {cardsLength}</span>
             </p>
-            <p className={classes.loader__text}>
+            {/* <p className={classes.loader__text}>
                 Отфильтровано :
                 <span className={classes['loader__text-count']}> {state.filteredCards.length}</span>
-            </p>
+            </p> */}
             <p className={classes.loader__text}>
                 На показ:
-                <span className={classes['loader__text-count']}> {state.cardsOnShow.length}</span>
+                <span className={classes['loader__text-count']}> {cardsOnShow}</span>
             </p>
-            {state.status === 'LOADING' && <Loader />}
+            {status === 'LOADING' && <Loader />}
+            {status === 'ERROR' && <Error />}
         </div>
     );
 }
 
-const mapStateToProps = (state) => {
-    return { state };
-};
-
-export default connect(mapStateToProps, actions)(Filters);
+export default Filters;
