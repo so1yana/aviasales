@@ -21,8 +21,7 @@ const initialState = {
     },
     sorting: 'CHEAP',
     cards: [],
-    filteredCards: [],
-    cardsOnShow: [],
+    cardsOnShow: 0,
 };
 
 const allActiveFilters = {
@@ -106,45 +105,31 @@ const reducer = (state = initialState, action) => {
             }
         case 'CARD':
             switch (action.card) {
+                case 'ADD_ON_SHOW':
+                    return { ...state, cardsOnShow: action.payload };
                 case 'ADD':
                     const cards = [...state.cards];
                     if (!Array.isArray(action.body)) cards.push(action.body);
                     else cards.push(...action.body);
                     return { ...state, cards };
-                case 'ADD_ON_SHOW':
-                    const cardsOnShow = [...state.cardsOnShow];
-                    return {
-                        ...state,
-                        cardsOnShow: [
-                            ...cardsOnShow,
-                            ...[
-                                ...state.filteredCards.slice(
-                                    cardsOnShow.length,
-                                    cardsOnShow.length + 5,
-                                ),
-                            ],
-                        ],
-                    };
-                case 'CLEAN_ON_SHOW':
-                    return { ...state, cardsOnShow: [] };
                 case 'SORT':
                     switch (state.sorting) {
                         case 'CHEAP':
-                            const cheapSorted = [...state.filteredCards].sort(
+                            const cheapSorted = [...state.cards].sort(
                                 (el1, el2) => el1.price - el2.price,
                             );
-                            return { ...state, filteredCards: cheapSorted };
+                            return { ...state, cards: cheapSorted };
                         case 'FAST':
-                            const fastSorted = [...state.filteredCards].sort((el1, el2) => {
+                            const fastSorted = [...state.cards].sort((el1, el2) => {
                                 const firstDuration =
                                     el1.segments[0].duration + el1.segments[1].duration;
                                 const secondDuration =
                                     el2.segments[0].duration + el2.segments[1].duration;
                                 return firstDuration - secondDuration;
                             });
-                            return { ...state, filteredCards: fastSorted };
+                            return { ...state, cards: fastSorted };
                         case 'OPTIMAL':
-                            const optimalSorted = [...state.filteredCards].sort((el1, el2) => {
+                            const optimalSorted = [...state.cards].sort((el1, el2) => {
                                 const firstPrice = el1.price;
                                 const secondPrice = el2.price;
                                 const firstDuration =
@@ -166,43 +151,13 @@ const reducer = (state = initialState, action) => {
                                     secondStopsCount * 1000;
                                 return firstTotalScore - secondTotalScore;
                             });
-                            return { ...state, filteredCards: optimalSorted };
+                            return { ...state, cards: optimalSorted };
                         default:
                             return state;
                     }
-                case 'FILTER':
-                    if (state.filters.isAllActive) {
-                        return { ...state, filteredCards: [...state.cards] };
-                    }
-                    const filteredItems = [
-                        ...state.cards.filter((card) => {
-                            let isReturnWithout = false;
-                            let isReturnOne = false;
-                            let isReturnTwo = false;
-                            let isReturnThree = false;
-                            const stopsSum =
-                                card.segments[0].stops.length + card.segments[1].stops.length;
-                            if (state.filters.isWithoutTransferActive) {
-                                isReturnWithout = stopsSum === 0;
-                            }
-                            if (state.filters.isOneTransferActive) {
-                                isReturnOne = stopsSum === 1;
-                            }
-                            if (state.filters.isTwoTransfersActive) {
-                                isReturnTwo = stopsSum === 2;
-                            }
-                            if (state.filters.isThreeTransfersActive) {
-                                isReturnThree = stopsSum === 3;
-                            }
-                            return isReturnOne || isReturnWithout || isReturnTwo || isReturnThree;
-                        }),
-                    ];
-                    return { ...state, filteredCards: filteredItems };
                 default:
                     return state;
             }
-        case 'SEARCH':
-            return { ...state, searchActive: action.payload };
         default:
             return state;
     }
